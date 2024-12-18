@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحقق من صحة المستند</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+        }
+
+        /* خلفية الفيديو */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .login-block {
+            width: 462px;
+            padding: 25px;
+            background: transparent; /* شفافية خلفية النموذج */
+            border-radius: 5px;
+            margin: 10% auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-block h2 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .login-block input {
+            width: 100%;
+            height: 42px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-family: 'Tajawal', sans-serif;
+            text-align: center;
+            outline: none;
+            padding: 0 20px;
+        }
+
+        .login-block button {
+            width: 100%;
+            height: 40px;
+            background: #00a7c4;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .login-block button:hover {
+            background: #0087a1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3px;
+            color: rgb(243, 246, 247);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 13px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- خلفية الفيديو -->
+    <video class="video-background" autoplay muted loop>
+        <source src="background-video.mp4" type="video/mp4">
+        <!-- رسالة عند عدم دعم الفيديو -->
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+
+    <div class="login-block">
+        <h2>Document Verification</h2>
+        <h2>التحقق من صحة المستند</h2>
+
+        <input type="text" id="documentNumber" placeholder="رقم المستند" maxlength="12">
+        <button onclick="verifyDocument()">تحقق</button>
+
+        <p id="result" style="text-align: center; font-size: 16px; color: #333; margin-top: 15px;"></p>
+    </div>
+
+    <footer>
+        <p>© 2024 All Rights Reserved | The University of Jordan</p>
+        <p>Contact us: sgs@ju.edu.jo</p>
+    </footer>
+
+    <script>
+        // قائمة الأرقام الصالحة
+        const validDocuments = ["0240536"];
+
+        // دالة التحقق من صحة المستند
+        function verifyDocument() {
+            const docNumber = document.getElementById("documentNumber").value.trim();
+
+            if (!docNumber) {
+                swal("خطأ", "يرجى إدخال رقم المستند", "error");
+                return;
+            }
+
+            if (validDocuments.includes(docNumber)) {
+                swal("نجاح", "عبدالفتاح سعد سعيد - مستند قبول ماجستير", "success");
+                document.getElementById("result").innerText = "المستند صالح ✅";
+            } else {
+                swal("خطأ", "المستند غير صالح", "error");
+                document.getElementById("result").innerText = "المستند غير صالح ❌";
+            }
+        }
+    </script>
+</body>
+</html>
